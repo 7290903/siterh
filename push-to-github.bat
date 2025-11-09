@@ -46,21 +46,19 @@ echo Проверка наличия удаленного репозитория
 git remote -v >nul 2>&1
 if errorlevel 1 (
     echo Удаленный репозиторий не настроен!
-    echo.
-    set /p remote_url="https://github.com/7290903/siterh.git"
-    if "%remote_url%"=="" (
-        echo URL не введен. Настройте remote вручную командой:
-        echo git remote add origin https://github.com/7290903/siterh.git
-        pause
-        exit /b 1
-    )
-    git remote add origin "%remote_url%"
+    echo Добавление remote: https://github.com/7290903/siterh.git
+    git remote add origin https://github.com/7290903/siterh.git
     if errorlevel 1 (
         echo ОШИБКА: Не удалось добавить remote
         pause
         exit /b 1
     )
     echo Remote добавлен успешно!
+    echo.
+) else (
+    echo Проверка URL remote репозитория...
+    git remote set-url origin https://github.com/7290903/siterh.git
+    echo Remote настроен на: https://github.com/7290903/siterh.git
     echo.
 )
 
