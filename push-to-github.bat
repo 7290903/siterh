@@ -47,10 +47,10 @@ git remote -v >nul 2>&1
 if errorlevel 1 (
     echo Удаленный репозиторий не настроен!
     echo.
-    set /p remote_url="https://github.com/7290903"
+    set /p remote_url="https://github.com/7290903/siterh.git"
     if "%remote_url%"=="" (
         echo URL не введен. Настройте remote вручную командой:
-        echo git remote add origin https://github.com/7290903/bolt_rh1.git
+        echo git remote add origin https://github.com/7290903/siterh.git
         pause
         exit /b 1
     )
