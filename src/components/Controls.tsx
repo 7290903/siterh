@@ -98,22 +98,22 @@ export default function Controls({ id }: ControlsProps) {
             {/* Анимированная лента брендов */}
             <div className="flex animate-scroll" style={{ width: 'max-content' }}>
               {/* Первый набор брендов */}
-              <div className="flex items-center gap-12 flex-shrink-0">
+              <div className="flex items-center gap-16 md:gap-20 lg:gap-24 flex-shrink-0">
                 {['SAVANT', 'WIRENBOARD', 'LUTRON', 'KNX', 'LINN', 'JVC', 'HDL', 'SONUS FABER'].map((brand, index) => (
                   <div
                     key={`first-${index}`}
-                    className="text-xs lg:text-sm font-light tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer whitespace-nowrap"
+                    className="text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer whitespace-nowrap"
                   >
                     {brand}
                   </div>
                 ))}
               </div>
               {/* Дубликат для бесшовной анимации */}
-              <div className="flex items-center gap-12 flex-shrink-0">
+              <div className="flex items-center gap-16 md:gap-20 lg:gap-24 flex-shrink-0">
                 {['SAVANT', 'WIRENBOARD', 'LUTRON', 'KNX', 'LINN', 'JVC', 'HDL', 'SONUS FABER'].map((brand, index) => (
                   <div
                     key={`second-${index}`}
-                    className="text-xs lg:text-sm font-light tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer whitespace-nowrap"
+                    className="text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer whitespace-nowrap"
                   >
                     {brand}
                   </div>
