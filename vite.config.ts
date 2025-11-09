@@ -9,6 +9,11 @@ export default defineConfig(({ mode }) => {
     ? (process.env.VITE_BASE_PATH || '/siterh/')
     : '/';
 
+  // Отладочный вывод (будет виден при сборке)
+  if (mode === 'production') {
+    console.log('Building with base path:', base);
+  }
+
   return {
     plugins: [react()],
     base,
@@ -32,6 +37,8 @@ export default defineConfig(({ mode }) => {
         assetFileNames: 'assets/[name].[hash].[ext]',
       },
     },
+    // Убеждаемся, что base path применяется ко всем ресурсам
+    assetsInlineLimit: 0,
   },
   };
 });
