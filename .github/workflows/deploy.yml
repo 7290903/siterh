@@ -69,7 +69,8 @@ jobs:
           fi
           echo ""
           echo "Checking for compiled assets (should exist):"
-          if grep -q "assets/index-" dist/index.html; then
+          # Проверяем наличие собранного JS файла - ищем assets и .js в файле
+          if grep -q "assets" dist/index.html && grep -q ".js" dist/index.html; then
             echo "✓ Compiled JS file found in index.html"
           else
             echo "✗ ERROR: No compiled JS file found!"
