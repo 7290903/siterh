@@ -41,6 +41,9 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: production
+          VITE_BASE_PATH: /siterh/
+          # Убеждаемся, что режим production
+          MODE: production
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
