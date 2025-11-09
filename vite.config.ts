@@ -3,15 +3,29 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // Base path для GitHub Pages (название репозитория)
-  // В production используем /siterh/, в dev - /
-  const base = mode === 'production' 
-    ? (process.env.VITE_BASE_PATH || '/siterh/')
-    : '/';
+  // Определяем base path в зависимости от платформы деплоя
+  // Vercel использует корневой путь, GitHub Pages - /siterh/
+  let base = '/';
+  
+  if (mode === 'production') {
+    // Если указан явный base path через переменную окружения
+    if (process.env.VITE_BASE_PATH) {
+      base = process.env.VITE_BASE_PATH;
+    }
+    // Если деплой на Vercel - используем корневой путь
+    else if (process.env.VERCEL) {
+      base = '/';
+    }
+    // По умолчанию для GitHub Pages
+    else {
+      base = '/siterh/';
+    }
+  }
 
   // Отладочный вывод (будет виден при сборке)
   if (mode === 'production') {
     console.log('Building with base path:', base);
+    console.log('Platform:', process.env.VERCEL ? 'Vercel' : 'GitHub Pages');
   }
 
   return {
