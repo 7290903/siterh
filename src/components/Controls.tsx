@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Smartphone, Lightbulb, Monitor, Radio, Mic, ScanFace } from 'lucide-react';
 
 interface ControlsProps {
@@ -5,6 +6,7 @@ interface ControlsProps {
 }
 
 export default function Controls({ id }: ControlsProps) {
+  const [isPaused, setIsPaused] = useState(false);
   const controlMethods = [
     {
       icon: <Smartphone className="w-full h-full" />,
@@ -96,13 +98,18 @@ export default function Controls({ id }: ControlsProps) {
         <div className="mt-24 pt-16 border-t border-white/10 overflow-hidden">
           <div className="relative w-full">
             {/* Анимированная лента брендов */}
-            <div className="flex animate-scroll" style={{ width: 'max-content' }}>
+            <div
+              className={`flex ${isPaused ? '' : 'animate-scroll'}`}
+              style={{ width: 'max-content' }}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+            >
               {/* Первый набор брендов */}
               <div className="flex items-center gap-16 md:gap-20 lg:gap-24 flex-shrink-0">
-                {['SAVANT', 'WIRENBOARD', 'LUTRON', 'KNX', 'LINN', 'JVC', 'HDL', 'SONUS FABER'].map((brand, index) => (
+                {['SAVANT', 'WIRENBOARD', 'LUTRON', 'KNX', 'LINN', 'JVC', 'HDL', 'SONUS FABER', 'HomeAssistant', 'Node-Red'].map((brand, index) => (
                   <div
                     key={`first-${index}`}
-                    className="text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer whitespace-nowrap"
+                    className="text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-[0.2em] opacity-40 hover:opacity-100 hover:text-amber-500 transition-all duration-300 cursor-pointer whitespace-nowrap"
                   >
                     {brand}
                   </div>
@@ -110,10 +117,10 @@ export default function Controls({ id }: ControlsProps) {
               </div>
               {/* Дубликат для бесшовной анимации */}
               <div className="flex items-center gap-16 md:gap-20 lg:gap-24 flex-shrink-0">
-                {['SAVANT', 'WIRENBOARD', 'LUTRON', 'KNX', 'LINN', 'JVC', 'HDL', 'SONUS FABER'].map((brand, index) => (
+                {['SAVANT', 'WIRENBOARD', 'LUTRON', 'KNX', 'LINN', 'JVC', 'HDL', 'SONUS FABER', 'HomeAssistant', 'Node-Red'].map((brand, index) => (
                   <div
                     key={`second-${index}`}
-                    className="text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer whitespace-nowrap"
+                    className="text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-[0.2em] opacity-40 hover:opacity-100 hover:text-amber-500 transition-all duration-300 cursor-pointer whitespace-nowrap"
                   >
                     {brand}
                   </div>
