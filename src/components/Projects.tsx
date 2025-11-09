@@ -271,17 +271,17 @@ export default function Projects({ id }: ProjectsProps) {
           {/* Кнопки навигации */}
           <button
             onClick={prevSlide}
-            className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 lg:-translate-x-12 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 hover:bg-black/90 border border-white/30 hover:border-amber-500 flex items-center justify-center transition-all duration-300 z-20 active:scale-95"
+            className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 lg:-translate-x-12 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 hover:border-amber-500/80 flex items-center justify-center transition-all duration-300 z-20 active:scale-95"
             aria-label="Предыдущий слайд"
           >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white/80 hover:text-white transition-colors duration-300" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 md:translate-x-4 lg:translate-x-12 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 hover:bg-black/90 border border-white/30 hover:border-amber-500 flex items-center justify-center transition-all duration-300 z-20 active:scale-95"
+            className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 md:translate-x-4 lg:translate-x-12 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 hover:border-amber-500/80 flex items-center justify-center transition-all duration-300 z-20 active:scale-95"
             aria-label="Следующий слайд"
           >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white/80 hover:text-white transition-colors duration-300" />
           </button>
 
           {/* Индикаторы */}
