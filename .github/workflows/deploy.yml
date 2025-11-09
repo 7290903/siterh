@@ -58,6 +58,23 @@ jobs:
           echo ""
           echo "Checking if base path is correct:"
           grep -q "/siterh/" dist/index.html && echo "✓ Base path found in index.html" || echo "✗ Base path NOT found in index.html"
+          echo ""
+          echo "Checking for source files (should NOT exist):"
+          if grep -q "src/main.tsx" dist/index.html; then
+            echo "✗ ERROR: Source file reference found in index.html!"
+            echo "This means Vite did not process the entry point correctly."
+            exit 1
+          else
+            echo "✓ No source file references found - build is correct"
+          fi
+          echo ""
+          echo "Checking for compiled assets (should exist):"
+          if grep -q "assets/index-.*\.js" dist/index.html; then
+            echo "✓ Compiled JS file found in index.html"
+          else
+            echo "✗ ERROR: No compiled JS file found!"
+            exit 1
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
