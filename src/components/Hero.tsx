@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
           ref={videoRef}
-          src="/movies.mp4"
+          src={`${import.meta.env.BASE_URL}movies.mp4`}
           className="absolute inset-0 w-full h-full object-cover"
           autoPlay
           loop

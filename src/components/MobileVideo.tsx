@@ -41,7 +41,7 @@ export default function MobileVideo({ id }: MobileVideoProps) {
               <div className="relative w-full h-full bg-black rounded-[2.5rem] overflow-hidden">
                 <video
                   ref={videoRef}
-                  src="/mobile.mp4"
+                  src={`${import.meta.env.BASE_URL}mobile.mp4`}
                   className="w-full h-full object-cover"
                   loop
                   muted
