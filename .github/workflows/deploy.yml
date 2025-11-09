@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 
 # Разрешаем только один одновременный деплой
+# Отменяем предыдущие запуски при новом push
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -52,6 +53,8 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+          # Не указываем name явно - GitHub автоматически использует "github-pages"
+          # Это позволяет deploy-pages автоматически найти артефакт
 
       - name: Deploy to GitHub Pages
         id: deployment
