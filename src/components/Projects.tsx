@@ -41,14 +41,62 @@ export default function Projects({ id }: ProjectsProps) {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleItems, setVisibleItems] = useState(1); // Количество видимых элементов
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Определяем количество видимых элементов в зависимости от размера экрана
+  useEffect(() => {
+    const updateVisibleItems = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setVisibleItems(3); // lg: 3 элемента
+      } else if (width >= 768) {
+        setVisibleItems(2); // md: 2 элемента
+      } else {
+        setVisibleItems(1); // mobile: 1 элемент
+      }
+    };
+
+    updateVisibleItems();
+    window.addEventListener('resize', updateVisibleItems);
+    return () => window.removeEventListener('resize', updateVisibleItems);
+  }, []);
+
+  // Обработка свайп-жестов для мобильных устройств
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+  };
 
   const nextSlide = () => {
-    const maxIndex = Math.max(0, projects.length - 3);
+    const maxIndex = Math.max(0, projects.length - visibleItems);
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    const maxIndex = Math.max(0, projects.length - 3);
+    const maxIndex = Math.max(0, projects.length - visibleItems);
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
 
@@ -124,7 +172,10 @@ export default function Projects({ id }: ProjectsProps) {
           <div className="overflow-hidden">
             <div
               className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+              style={{ transform: `translateX(-${currentIndex * (100 / visibleItems)}%)` }}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
             >
               {projects.map((project, index) => (
                 <div
@@ -220,17 +271,17 @@ export default function Projects({ id }: ProjectsProps) {
           {/* Кнопки навигации */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 w-12 h-12 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 hover:border-amber-500 flex items-center justify-center transition-all duration-300 z-10"
+            className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 lg:-translate-x-12 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 hover:bg-black/90 border border-white/30 hover:border-amber-500 flex items-center justify-center transition-all duration-300 z-20 active:scale-95"
             aria-label="Предыдущий слайд"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 w-12 h-12 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 hover:border-amber-500 flex items-center justify-center transition-all duration-300 z-10"
+            className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 md:translate-x-4 lg:translate-x-12 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 hover:bg-black/90 border border-white/30 hover:border-amber-500 flex items-center justify-center transition-all duration-300 z-20 active:scale-95"
             aria-label="Следующий слайд"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           {/* Индикаторы */}
