@@ -47,7 +47,7 @@ git remote -v >nul 2>&1
 if errorlevel 1 (
     echo Удаленный репозиторий не настроен!
     echo.
-    set /p remote_url="Введите URL вашего GitHub репозитория (например: https://github.com/username/repo.git): "
+    set /p remote_url="Введите URL вашего GitHub репозитория (например: https://github.com/7290903/repo.git): "
     if "%remote_url%"=="" (
         echo URL не введен. Настройте remote вручную командой:
         echo git remote add origin YOUR_REPO_URL
