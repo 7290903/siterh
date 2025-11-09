@@ -48,6 +48,12 @@ jobs:
         # Выводим информацию о сборке для отладки
         continue-on-error: false
 
+      - name: Clean old build artifacts
+        run: |
+          # Удаляем старые артефакты, если они есть
+          rm -rf dist/.git dist/.gitignore 2>/dev/null || true
+          echo "Build artifacts cleaned"
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
