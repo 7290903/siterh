@@ -73,7 +73,7 @@ export default function Controls({ id }: ControlsProps) {
                   <img
                     src={method.image}
                     alt={method.title}
-                    className="w-full h-full object-cover md:object-contain"
+                    className="w-full h-full object-contain p-2 md:p-0"
                   />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500 pointer-events-none"></div>
                   <div className="absolute inset-0 flex items-center justify-center text-white/80 group-hover:text-white group-hover:scale-110 transition-all duration-500 pointer-events-none">
